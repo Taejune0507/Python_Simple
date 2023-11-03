@@ -72,7 +72,7 @@ from bs4 import BeautifulSoup
 url = "https://v.daum.net/v/20231101163231654"
 
 # 1. URL 접속해서 전체 소스코드 가져오기
-result = requests. get(url)
+result = requests.get(url)
 
 # status_code: 200(성공), 400번대 또는 500번대(오류)
 #print(result)
@@ -83,16 +83,31 @@ doc = BeautifulSoup(result.text, "html.parser")
 
 #  3. 원하는 정보 수집
 # -select() -> 결과(List Type)
+reg_date = doc.select("span.num_date")[0].get_text()
+print(f"날짜: {reg_date}")
 title = doc.select("h3.tit_view")[0].get_text()
 print(f"제목: {title}")
 
 # Tag이름으로만 SELECT 금지
 # 1. 선택자(id,class)
 # 2. 상위 관계(자식,자손)
-content_list = doc.select("div.article view p") #태그이름으로 select 하면 안됨 ex)doc.select("p")
+content_list = doc.select("div.article_view p") #태그이름으로 select 하면 안됨 ex)doc.select("div")
+#content_list = ["<p>문단1</p>","<p>문단2</p>",<p>문단3</p>, ... ]
 
 content = ""
+#p = "<p>문단1</p>"
 for p in content_list:
+    # p.get_text() -> "문단1"
+    # 반복: content = content + p.get_text()
+    #   1:  content("문단1")=   ""  + "문단1"
+    #   2:  content("문단1문단2") = "문단1" + "문단2"
+    #   3:  content("문단1문단2문단3") = "문단1문단2" + "문단3"
+    #   ...
+
     content += p.get_text()
 
+
 print(f"본문:{content}")
+
+
+
