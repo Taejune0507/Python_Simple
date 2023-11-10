@@ -21,7 +21,12 @@
 #   - ID and PW:
 #   2. SQL을 사용해서 작업 진행
 #   -SQL(구조질의어): RDB를 사용하기 위해서는 반드시 사용!
+#   -RDB(SQL)을 사용, NoSQL(SQL X)
 #   CREATE  -> INSERT
 #   READ    -> SELECT
 #   UPDATE  -> UPDATE
 #   DELETE  -> DELETE
+
+
+# pymongo: Python - MongoDB 연결해서 사용
+from pymongo import MongoClient
